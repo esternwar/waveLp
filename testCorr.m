@@ -13,7 +13,7 @@ noiseG=15*normrnd(0,0.1,size(t));
 %ë÷ì+øóì
 a=1;
 b=(wk-w0)/(2*T);
-f=exp(-a*((t-tau0).^2)/2+1i*(w0+b*(t-tau0)).*(t-tau0)+1i*100*(t-tau0));
+f=exp(-a*((t-tau0).^2)/2+1i*(w0+b*(t-tau0)).*(t-tau0)+1i*55*(t-tau0));
 %plot(t,f)
 % xlabel('t, ñ', 'FontSize',14,'FontWeight','bold')
 % ylabel('A','FontSize',14,'FontWeight','bold', 'Rotation', 0)
@@ -45,14 +45,15 @@ sizeDT = length(2.5:0.01:3.5);
 %  xlabel('w, ãÖ', 'FontSize',14,'FontWeight','bold')
 % ylabel('L2','FontSize',14,'FontWeight','bold', 'Rotation', 0)
 
-% sizeDW = length(40:0.1:60);
-%sizeDT = length(1:0.1:5);
+sizeDW = 2:0.02:4;
+sizeDT = 70:0.3:120;
 x = 1;
 y = 1;
 
-for tau=2.5:0.01:3.5
-    for w=90:0.1:110
+for tau=2:0.02:4
+    for w=20:0.3:70
         g=exp(-a*((t-tau).^2)/2+1i*(w0+b*(t-tau)).*(t-tau0)+1i*w*(t-tau0));
+       %g=exp(-a*((t-tau).^2)/2+1i*(w0+b*(t-tau)).*(t-tau0)+1i*w*(t-tau0))
         resfunc = (f-g);
         DeltaTauW(x,y) = trapz((resfunc.*conj(resfunc)));
         x = x+1;
@@ -60,10 +61,11 @@ for tau=2.5:0.01:3.5
     x=1;
     y = y+1;
 end
-min(min(DeltaTauW))
+mesh(DeltaTauW)
+%min(min(DeltaTauW))
 % figure(1)
 % colorbar
-% mesh((2.5:0.01:3.5), (90:0.1:110), DeltaTauW)
+% mesh((1:0.1:5), (80:0.1:110), DeltaTauW)
 % xlabel('t, ñ', 'FontSize',14,'FontWeight','bold')
 % ylabel('w, Ãö','FontSize',14,'FontWeight','bold', 'Rotation', 0)
 % zlabel('L2', 'FontSize',14,'FontWeight','bold', 'Rotation', 0)
@@ -105,3 +107,4 @@ min(min(DeltaTauW))
 %     y = y+1;
 % end
 % mesh(DeltaTauW)
+
